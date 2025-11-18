@@ -12,6 +12,11 @@ body {
     overflow-x: hidden; /* Prevent horizontal scroll from animations */
 }
 
+img {
+    width: auto;
+    height: auto;
+}
+
 .container {
     max-width: 900px;
     background-color: #fff;
@@ -338,5 +343,6 @@ body {
     }
 
 }
+
 
 
