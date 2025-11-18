@@ -1,3 +1,4 @@
+
 /* General Styling */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -10,11 +11,6 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow-x: hidden; /* Prevent horizontal scroll from animations */
-}
-
-img {
-    width: auto;
-    height: auto;
 }
 
 .container {
@@ -166,6 +162,7 @@ img {
 
 .gallery-img:hover {
     transform: scale(1.05);
+     width: auto; 
 }
 
 /* Interesting Fact Section */
@@ -343,6 +340,7 @@ img {
     }
 
 }
+
 
 
 
