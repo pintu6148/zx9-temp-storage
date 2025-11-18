@@ -329,10 +329,14 @@ body {
         font-size: 1.5em;
     }
     .gallery {
-        grid-template-columns: 1fr; /* Stack images on small screens */
+      display: flex;
+        flex-direction: column;   /* Photos come from top to bottom */
+        gap: 20px;
     }
     .gallery-img {
-        height: 200px;
+        width: 100%;     /* Full width on mobile */
+        height: auto;    /* Auto height */
+   
     }
     .cta-button {
         padding: 15px 25px;
@@ -340,6 +344,7 @@ body {
     }
 
 }
+
 
 
 
