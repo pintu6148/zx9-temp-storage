@@ -215,6 +215,64 @@ body {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* NEW GIFT OPTIONS STYLES */
+.gift-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px dashed #ff4081;
+    border-radius: 10px;
+    background-color: #fff8fb;
+    transition: all 0.5s ease-in-out;
+}
+
+.gift-options.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gift-header {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #e91e63;
+    margin: 0;
+}
+
+.gift-link {
+    width: 80%;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.darshan-link {
+    background-color: #ffc107; /* Yellow */
+    color: #333;
+}
+
+.darshan-link:hover {
+    background-color: #ffb300;
+    transform: translateY(-2px);
+}
+
+.video-link {
+    background-color: #9c27b0; /* Purple */
+    color: white;
+}
+
+.video-link:hover {
+    background-color: #7b1fa2;
+    transform: translateY(-2px);
+}
+/* END NEW GIFT OPTIONS STYLES */
+
+
 /* Hidden Reveal Button */
 .hidden-button {
     position: absolute;
@@ -237,7 +295,7 @@ body {
 
 @keyframes fadeInScale {
     from { opacity: 0; transform: scale(0.8); }
-    to { opacity: 1; transform: scale(1); }
+    to { transform: scale(1); }
 }
 
 @keyframes slideInUp {
@@ -295,6 +353,11 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+        width: 95%; 
+        padding: 20px 15px; 
+    }
     .header-text {
         font-size: 2.5em;
     }
@@ -328,19 +391,15 @@ body {
         font-size: 1.5em;
     }
     .gallery {
-      /* This is now the default style, so these overrides are no longer strictly needed but don't hurt */
-      /* display: flex; */
-      /* flex-direction: column; */
-      gap: 20px;
-    }
-    .gallery-img {
-        /* This is now the default style, so these overrides are no longer strictly needed but don't hurt */
-        /* width: 100%; */
-        /* height: auto; */
+        gap: 20px;
     }
     .cta-button {
         padding: 15px 25px;
         font-size: 1.1em;
+    }
+    .gift-link {
+        width: 90%; /* Wider links on mobile */
+        font-size: 1em;
     }
 
 }
