@@ -1,4 +1,3 @@
-
 /* General Styling */
 body {
     font-family: 'Montserrat', sans-serif;
@@ -142,16 +141,16 @@ body {
     opacity: 0;
 }
 
-/* Photo Gallery */
+/* Photo Gallery - REVISED FOR VERTICAL FULL-WIDTH STACK */
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+    display: flex; /* Changed from grid */
+    flex-direction: column; /* Stacks images vertically on all screens */
     gap: 20px;
     margin-top: 40px;
 }
 
 .gallery-img {
-    max-width: auto;
+    width: 100%; /* Ensures each image takes the full width, appearing "one by one" */
     height: auto;
     object-fit: cover;
     border-radius: 10px;
@@ -162,7 +161,7 @@ body {
 
 .gallery-img:hover {
     transform: scale(1.05);
-     width: auto; 
+    width: 100%; /* Kept at 100% to fill width */
 }
 
 /* Interesting Fact Section */
@@ -243,7 +242,7 @@ body {
 
 @keyframes slideInUp {
     from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes popIn {
@@ -329,14 +328,15 @@ body {
         font-size: 1.5em;
     }
     .gallery {
-      display: flex;
-        flex-direction: column;   /* Photos come from top to bottom */
-        gap: 20px;
+      /* This is now the default style, so these overrides are no longer strictly needed but don't hurt */
+      /* display: flex; */
+      /* flex-direction: column; */
+      gap: 20px;
     }
     .gallery-img {
-        width: 100%;     /* Full width on mobile */
-        height: auto;    /* Auto height */
-   
+        /* This is now the default style, so these overrides are no longer strictly needed but don't hurt */
+        /* width: 100%; */
+        /* height: auto; */
     }
     .cta-button {
         padding: 15px 25px;
@@ -344,8 +344,3 @@ body {
     }
 
 }
-
-
-
-
-
