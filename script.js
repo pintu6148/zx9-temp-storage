@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const countdownSection = document.getElementById('countdown-section');
     const surpriseContent = document.getElementById('surprise-content');
     const secretRevealButton = document.getElementById('secret-reveal-button');
+    const giftButton = document.getElementById('gift-button'); // NEW
+    const giftOptions = document.getElementById('gift-options'); // NEW
 
     const daysSpan = document.getElementById('days');
     const hoursSpan = document.getElementById('hours');
@@ -89,6 +91,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // NEW FUNCTIONALITY: Toggle gift options visibility
+    giftButton.addEventListener('click', function(e) {
+        e.preventDefault(); // Stop the button from acting like a link (it's a button now)
+        
+        // Toggle the visibility class
+        if (giftOptions.classList.contains('hidden')) {
+            giftOptions.classList.remove('hidden');
+            giftOptions.classList.add('visible');
+            giftButton.textContent = '👆 Choose Your Gift Below! 👇'; // Change button text
+        } else {
+            giftOptions.classList.remove('visible');
+            giftOptions.classList.add('hidden');
+            giftButton.textContent = '🎁 Click for Your Real Gift! 🎁'; // Restore button text
+        }
+    });
+    // END NEW FUNCTIONALITY
 
     // Initial call to set up the countdown
     updateCountdown();
