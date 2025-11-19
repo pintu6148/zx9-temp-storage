@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Birthday, My Dearest Payal! ❤</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+    body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow-x: hidden;
+        
+        /* UPDATED: Purple-themed gradient with heart patterns */
+        background: linear-gradient(135deg, #e0b0ff 0%, #d8bfd8 100%); /* Soft purple to lilac */
+        position: relative; 
+        overflow: hidden; 
+    }
+
+    /* Heart background pattern */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* A subtle heart pattern using SVG data URL */
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23cbaac4" opacity="0.9" d="M50 88.2 L19.1 57.3 C-6.4 31.8 19.1 0 50 25.5 C80.9 0 106.4 31.8 80.9 57.3 Z"/></svg>'); 
+        background-size: 80px 80px;
+        opacity: 0.1; 
+        pointer-events: none; 
+        animation: animateHearts 30s linear infinite;
+    }
+
+    @keyframes animateHearts {
+        from { background-position: 0 0; }
+        to { background-position: 800px 800px; }
+    }
+
+    .container {
+        max-width: 900px;
+        background-color: rgba(255, 255, 255, 0.95); 
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(128, 0, 128, 0.3); 
+        text-align: center;
+        position: relative; 
+        z-index: 1; 
+    }
+
+    .hidden { display: none; }
+
+    /* Slider (Only used for Main Memories now) */
+    .slider-wrapper { overflow: hidden; position: relative; }
+    .slider { display: flex; transition: transform 0.5s ease-in-out; }
+    .slider img { 
+        min-width: 100%; 
+        height: 350px; 
+        object-fit: cover; 
+        border-radius: 15px;
+    }
+
+    .slider-button {
+        position: absolute;
+        top: 50%; transform: translateY(-50%);
+        background: rgba(128, 0, 128, 0.6); 
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        border: none; cursor: pointer;
+        transition: background 0.3s;
+        z-index: 10; 
+    }
+    .slider-button:hover {
+        background: rgba(128, 0, 128, 0.9); 
+    }
+    .slider-button-left { left: 10px; }
+    .slider-button-right { right: 10px; }
+
+    /* Back Button Style - Positioned Top Left */
+    #gift-section .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: #8a2be2; 
+        color: white;
+        padding: 10px 20px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 10; 
+    }
+    #gift-section .back-button:hover {
+        background-color: #6a0dad; 
+    }
+
+    /* --- Modal Styles for Playlist Popup --- */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7); 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100; 
+        overflow-y: auto; 
+        padding: 20px 0;
+    }
+
+    .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 700px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.5); 
+        text-align: center;
+        margin: auto; 
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #800080;
+        cursor: pointer;
+    }
+
+    /* Vertical Playlist Styling */
+    .vertical-playlist-item {
+        margin-bottom: 20px;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        background-color: #f5f5f5;
+    }
+    /* Ensure the iframe itself is responsive inside the container */
+    .vertical-playlist-item iframe {
+        display: block;
+        width: 100%;
+        height: 350px; 
+    }
+
+
+    @media(max-width: 768px){
+        .container { padding: 20px 15px; }
+        .slider img { height: 250px; }
+        #gift-section .back-button { top: 10px; left: 10px; padding: 8px 15px; }
+        .modal-content { max-width: 95%; }
+        .vertical-playlist-item iframe { height: 200px; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header id="countdown-section">
+        <h1 class="text-4xl font-bold text-purple-600 mb-3" style="font-family:'Dancing Script'">Something Special is Coming for You, Payal!</h1>
+        <p class="text-gray-600">Tick-tock... the magic begins when the clock hits zero!</p>
+
+        <div class="flex justify-center gap-5 mt-6 text-white">
+            <div class="bg-purple-500 p-4 rounded-xl"><span id="days" class="text-3xl font-bold">00</span><br>Days</div>
+            <div class="bg-purple-500 p-4 rounded-xl"><span id="hours" class="text-3xl font-bold">00</span><br>Hours</div>
+            <div class="bg-purple-500 p-4 rounded-xl"><span id="minutes" class="text-3xl font-bold">00</span><br>Minutes</div>
+            <div class="bg-purple-500 p-4 rounded-xl"><span id="seconds" class="text-3xl font-bold">00</span><br>Seconds</div>
+        </div>
+    </header>
+
+    <main id="surprise-content" class="hidden mt-10">
+        <h2 class="text-5xl text-purple-600 mb-4" style="font-family:'Dancing Script'">Happy Birthday, My Dearest Payal!</h2>
+
+        <p class="text-gray-700 mb-6">The wait is over! Today is the most beautiful day of the year.</p>
+
+        <img src="https://placehold.co/800x450/800080/ffffff?text=Your+Photo+Here"
+             class="w-full rounded-2xl shadow-xl mb-6">
+
+        <p class="text-left leading-relaxed text-gray-700">
+            To the most incredible woman, my future wife, Payal... Happy Birthday!  
+            Every day with you is a blessing. Your smile, kindness and heart make
+            everything beautiful.
+        </p>
+
+        <p class="text-left leading-relaxed text-gray-700 mt-3">
+            I am excited for our future—countless memories, celebrations and love-filled
+            chapters waiting ahead. I love you endlessly.
+        </p>
+
+        <p class="text-right text-purple-600 text-3xl mt-5" style="font-family:'Dancing Script'">– Your Loving Pintu ❤</p>
+
+        <h3 class="text-2xl font-bold text-purple-600 mt-10 mb-4">Our Sweetest Memories</h3>
+
+        <div class="slider-wrapper max-w-lg mx-auto mb-10">
+            <div id="main-slider" class="slider"></div>
+            <button onclick="changeSlide('main', -1)" class="slider-button slider-button-left">❮</button>
+            <button onclick="changeSlide('main', 1)" class="slider-button slider-button-right">❯</button>
+        </div>
+
+        <button onclick="showGift()" class="bg-pink-500 text-white px-6 py-3 rounded-full text-xl shadow-lg hover:bg-pink-600">
+            🎁 Click to See Your Real Gift 🎁
+        </button>
+    </main>
+
+    <section id="gift-section" class="hidden mt-10">
+        <button onclick="goBackToSurprise()" class="back-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back
+        </button>
+
+        <h1 class="text-5xl text-purple-700 mb-4" style="font-family:'Dancing Script'">Aapka Asli Tohfa! 💝</h1>
+
+        <h3 class="text-2xl font-bold text-purple-600 mb-3">🎧 Darshan Raval's Hit List (Vertical)</h3>
+
+        <button onclick="openModal('darshan')"
+            class="bg-red-500 text-white py-3 px-8 rounded-full shadow-lg text-xl hover:bg-red-600 mb-8">
+            ▶ Open Darshan Playlist
+        </button>
+        
+        <h3 class="text-2xl font-bold text-purple-600 mt-10 mb-3">💖 Special Video Collection (Vertical)</h3>
+
+        <button onclick="openModal('special')"
+           class="bg-purple-600 text-white py-3 px-8 rounded-full shadow-lg text-xl hover:bg-purple-700">
+           🎥 Open Special Videos
+        </button>
+
+    </section>
+
+</div>
+
+<div id="video-modal-darshan" class="modal-overlay hidden">
+    <div class="modal-content">
+        <button onclick="closeModal('darshan')" class="modal-close">&times;</button>
+        <h2 class="text-3xl text-red-600 mb-4" style="font-family:'Dancing Script'">Darshan Raval's Playlist</h2>
+        
+        <div id="vertical-playlist-darshan">
+            </div>
+
+    </div>
+</div>
+
+<div id="video-modal-special" class="modal-overlay hidden">
+    <div class="modal-content">
+        <button onclick="closeModal('special')" class="modal-close">&times;</button>
+        <h2 class="text-3xl text-purple-600 mb-4" style="font-family:'Dancing Script'">Your Special Collection</h2>
+        
+        <div id="vertical-playlist-special">
+             </div>
+    </div>
+</div>
+
+
+<script>
+/* ------------------------ COUNTDOWN ------------------------ */
+const targetDate = new Date("Nov 19, 2025 08:00:00").getTime(); 
+
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+        clearInterval(timer);
+        document.getElementById("countdown-section").style.display = "none";
+        document.getElementById("surprise-content").classList.remove("hidden");
+        confetti();
+        return;
+    }
+
+    document.getElementById("days").innerHTML = Math.floor(diff / (1000 * 60 * 60 * 24));
+    document.getElementById("hours").innerHTML = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    document.getElementById("minutes").innerHTML = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    document.getElementById("seconds").innerHTML = Math.floor((diff % (1000 * 60)) / 1000);
+}, 1000);
+
+
+/* ------------------------ SLIDER DATA ------------------------ */
+let sliders = {
+    main: {
+        photos: [
+            "https://placehold.co/800x600/800080/ffffff?text=Memory+1", 
+            "https://placehold.co/800x600/a9e2f4/000?text=Memory+2",
+            "https://placehold.co/800x600/fff3b0/000?text=Memory+3",
+            "https://placehold.co/800x600/c7f9cc/000?text=Memory+4",
+        ],
+        index: 0
+    },
+    // Darshan Raval Videos - Used for Vertical List
+    'video-darshan': {
+        photos: [
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/5F2v_M-pE-A?si=t5y-rB_g-Lh2R-uM" title="Darshan Raval - Baarish Lete Aana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/s2tQ4c7d0Hw?si=0Bv1f4q8t5x_H5fD" title="Darshan Raval - Pehli Mohabbat" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/bL7RkL0gO3w?si=4jA-2Z8Fm_L6r2Pz" title="Darshan Raval - Tera Zikr" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+        ],
+        index: 0
+    },
+    // Special Videos - NOW USED FOR Vertical List
+    'video-special': {
+        photos: [
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/G1IbRygzX-A?si=4jA-2Z8Fm_L6r2Pz" title="Romantic Scene from a Movie" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/y6120QO-q0c?si=4jA-2Z8Fm_L6r2Pz" title="Cute Puppies Compilation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>',
+            '<iframe width="100%" height="350" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=4jA-2Z8Fm_L6r2Pz" title="Rick Astley - Never Gonna Give You Up" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+        ],
+        index: 0
+    },
+};
+
+
+/* ------------------------ LOAD SLIDERS ------------------------ */
+function loadAllSliders(){
+    // Load Main Slider (Horizontal)
+    const mainSlider = document.getElementById('main-slider');
+    if (mainSlider) {
+        // Only load image sources for the main slider
+        mainSlider.innerHTML = sliders.main.photos.map(src => <img src="${src}">).join("");
+    }
+    
+    // Load Darshan Raval Videos into Vertical Playlist Container
+    loadVerticalPlaylist('darshan');
+    
+    // Load Special Videos into Vertical Playlist Container
+    loadVerticalPlaylist('special');
+}
+
+// NEW FUNCTION: Loads videos into the specified vertical container
+function loadVerticalPlaylist(type) {
+    const containerId = 'vertical-playlist-' + type;
+    const container = document.getElementById(containerId);
+    
+    // Determine which video list to use based on type ('darshan' or 'special')
+    const videoList = sliders['video-' + type].photos;
+    
+    if (container) {
+        container.innerHTML = videoList.map(iframeCode => 
+            <div class="vertical-playlist-item">${iframeCode}</div>
+        ).join("");
+    }
+}
+
+loadAllSliders();
+
+
+/* ------------------------ SLIDE CHANGE (Only for Main Horizontal Slider) ------------------------ */
+function changeSlide(name, direction){
+    // This only runs for the 'main' slider now
+    const slider = sliders[name];
+    slider.index = (slider.index + direction + slider.photos.length) % slider.photos.length;
+
+    const sliderDiv = document.getElementById(name + "-slider");
+    sliderDiv.style.transform = translateX(${-slider.index * 100}%);
+}
+
+
+/* ------------------------ MODAL FUNCTIONS ------------------------ */
+function openModal(type) {
+    if (type === 'darshan') {
+        document.getElementById('video-modal-darshan').classList.remove('hidden');
+    } else if (type === 'special') {
+        document.getElementById('video-modal-special').classList.remove('hidden');
+    }
+}
+
+function closeModal(type) {
+    if (type === 'darshan') {
+        document.getElementById('video-modal-darshan').classList.add('hidden');
+    } else if (type === 'special') {
+        document.getElementById('video-modal-special').classList.add('hidden');
+    }
+}
+
+
+/* ------------------------ NAVIGATION FUNCTIONS ------------------------ */
+function showGift(){
+    document.getElementById("surprise-content").classList.add("hidden");
+    document.getElementById("gift-section").classList.remove("hidden");
+    confetti();
+}
+
+function goBackToSurprise(){
+    document.getElementById("gift-section").classList.add("hidden");
+    document.getElementById("surprise-content").classList.remove("hidden");
+}
+</script>
+</body>
+</html>
